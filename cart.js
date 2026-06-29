@@ -254,7 +254,7 @@ function render() {
 
             </div>
 
-            <a class="btn" href="checkout.html">
+            <a class="btn" href="register.html">
     Lanjut ke Pembayaran
 </a>
 

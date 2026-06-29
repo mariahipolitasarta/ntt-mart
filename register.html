@@ -99,28 +99,17 @@ button:hover{
 
     <form id="registerForm">
 
-        <input
-            type="text"
-            id="nama"
-            placeholder="Nama Lengkap"
-            required>
+<input type="text" id="nama" placeholder="Nama Lengkap" required>
 
-        <input
-            type="text"
-            id="telepon"
-            placeholder="No. Telepon"
-            required>
+<input type="text" id="telepon" placeholder="No. Telepon" required>
 
-        <textarea
-            id="alamat"
-            placeholder="Alamat Lengkap"
-            required></textarea>
+<textarea id="alamat" placeholder="Alamat Lengkap" required></textarea>
 
-        <button type="submit">
-            Lanjutkan Pemesanan
-        </button>
+<button type="submit">
+Lanjutkan Pemesanan
+</button>
 
-    </form>
+</form>
 
     <div class="info">
         Silakan lengkapi data diri untuk melanjutkan ke proses checkout.
@@ -129,14 +118,24 @@ button:hover{
 </div>
 
 <script>
+
 document.getElementById("registerForm").addEventListener("submit", function(e){
 
     e.preventDefault();
 
+    const nama = document.getElementById("nama").value.trim();
+    const telepon = document.getElementById("telepon").value.trim();
+    const alamat = document.getElementById("alamat").value.trim();
+
+    if(nama === "" || telepon === "" || alamat === ""){
+        alert("Silakan isi data diri terlebih dahulu.");
+        return;
+    }
+
     const user = {
-        nama: document.getElementById("nama").value,
-        telepon: document.getElementById("telepon").value,
-        alamat: document.getElementById("alamat").value
+        nama: nama,
+        telepon: telepon,
+        alamat: alamat
     };
 
     localStorage.setItem("user", JSON.stringify(user));
@@ -144,6 +143,7 @@ document.getElementById("registerForm").addEventListener("submit", function(e){
     window.location.href = "checkout.html";
 
 });
+
 </script>
 
 </body>
