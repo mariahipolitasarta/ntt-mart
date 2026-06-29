@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+body{
+background:#f5f5f5;
+padding-bottom:90px;
+}
+.header{
+background:linear-gradient(180deg,#4b0000,#7a0000);
+color:#fff;
+padding:20px;
+text-align:center;
+}
+.container{
+padding:15px;
+}
+.card{
+background:#fff;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+.produk-row,
+.row{
+display:flex;
+justify-content:space-between;
+margin:8px 0;
+}
+.total{
+font-size:20px;
+font-weight:bold;
+color:#7a0000;
+}
+.btn{
+width:100%;
+padding:15px;
+border:none;
+background:#d4a12a;
+color:white;
+font-size:16px;
+border-radius:10px;
+cursor:pointer;
+}
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#4b0000;
+display:flex;
+justify-content:space-around;
+padding:15px;
+}
+.bottom-nav a{
+color:#d4a12a;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h2>NTT MART DIGITAL</h2>
+</div>
+
+<div class="container">
+
+<div class="card">
+<h3>Ringkasan Belanja</h3>
+<div id="checkoutItems"></div>
+</div>
+
+<div class="card">
+
+<h3>Metode Pembayaran</h3>
+
+<label>
+<input type="radio" name="metode" checked>
+QRIS
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="metode">
+GoPay
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="metode">
+Transfer Bank
+</label>
+
+</div>
+
+<button class="btn" onclick="bayar()">
+🔒 Konfirmasi Pesanan & Bayar
+</button>
+
+</div>
+
+<div class="bottom-nav">
+<a href="index.html">Home</a>
+<a href="kategori.html">Kategori</a>
+<a href="cart.html">Troli</a>
+<a href="history.html">Pesanan</a>
+<a href="profile.html">Profil</a>
+</div>
+
+<script>
+
+const products = [
+{id:1,nama:"Kopi Flores",harga:75000},
+{id:2,nama:"Tenun Ikat",harga:350000},
+{id:3,nama:"Selendang Tenun",harga:180000},
+{id:4,nama:"Kopi Nagekeo",harga:65000}
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const area = document.getElementById("checkoutItems");
+
+if(cart.length==0){
+
+area.innerHTML=`
+<p>Keranjang masih kosong.</p>
+<br>
+<a href="kategori.html">Belanja Sekarang</a>
+`;
+
+throw "";
+
+}
+
+let subtotal=0;
+
+cart.forEach(item=>{
+
+let p=products.find(x=>x.id==item.id);
+
+if(!p)return;
+
+let sub=p.harga*item.qty;
+
+subtotal+=sub;
+
+area.innerHTML+=`
+
+<div class="produk-row">
+
+<span>${p.nama} (${item.qty}x)</span>
+
+<span>Rp ${sub.toLocaleString("id-ID")}</span>
+
+</div>
+
+`;
+
+});
+
+let ongkir=25000;
+
+let total=subtotal+ongkir;
+
+area.innerHTML+=`
+
+<hr><br>
+
+<div class="row">
+<span>Subtotal</span>
+<span>Rp ${subtotal.toLocaleString("id-ID")}</span>
+</div>
+
+<div class="row">
+<span>Ongkir</span>
+<span>Rp ${ongkir.toLocaleString("id-ID")}</span>
+</div>
+
+<div class="row total">
+<span>Total</span>
+<span>Rp ${total.toLocaleString("id-ID")}</span>
+</div>
+
+`;
+
+function bayar(){
+
+let orders=JSON.parse(localStorage.getItem("orders"))||[];
+
+orders.push({
+
+id:Date.now(),
+
+tanggal:new Date().toLocaleDateString("id-ID"),
+
+status:"Diproses",
+
+total:total,
+
+items:cart
+
+});
+
+localStorage.setItem("orders",JSON.stringify(orders));
+
+localStorage.removeItem("cart");
+
+alert("Pesanan berhasil dibuat!");
+
+window.location.href="history.html";
+
+}
+
+</script>
+
+</body>
+</html>

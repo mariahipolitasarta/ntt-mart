@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesanan Saya</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+padding-bottom:80px;
+}
+
+.header{
+background:linear-gradient(180deg,#4b0000,#7a0000);
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.title-box{
+background:#5f0b0b;
+color:white;
+margin:15px;
+padding:12px;
+border-radius:10px;
+text-align:center;
+font-weight:bold;
+}
+
+#history{
+padding:10px;
+}
+
+.card{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:12px;
+box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+margin:8px 0;
+}
+
+.status{
+color:#d4a12a;
+font-weight:bold;
+}
+
+.total{
+font-size:20px;
+font-weight:bold;
+color:#7a0000;
+}
+
+.empty{
+background:white;
+padding:40px;
+text-align:center;
+border-radius:10px;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#4b0000;
+display:flex;
+justify-content:space-around;
+padding:15px;
+}
+
+.bottom-nav a{
+color:#d4a12a;
+text-decoration:none;
+font-weight:bold;
+}
+
+.active{
+color:white!important;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="header">
+<h2>NTT MART DIGITAL</h2>
+</div>
+
+<div class="title-box">
+Pesanan Saya
+</div>
+
+<div id="history"></div>
+
+<div class="bottom-nav">
+<a href="index.html">Home</a>
+<a href="kategori.html">Semua Produk</a>
+<a href="cart.html">Troli</a>
+<a href="history.html" class="active">Pesanan</a>
+<a href="profile.html">Profil</a>
+</div>
+
+<script src="history.js"></script>
+
+</body>
+</html>
